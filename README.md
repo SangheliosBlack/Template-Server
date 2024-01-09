@@ -4,7 +4,7 @@
 
 Descripción extensa de tu increíble servidor construido con Node.js.
 
-![_alt_text](https://img.shields.io/badge/Tesla-text-CC0000?style=for-the-badge&logo=Tesla)
+![_alt_text](https://img.shields.io/badge/Version-1.0.0-00d679?style=for-the-badge&logo=V)
 
 ## Tabla de Contenidos
 
