@@ -7,24 +7,10 @@
   </h1>
 </a>
 
-# Plantilla para Servidor Node.js
+# Server Template Node.js
 
-Descripción detallada de tu increíble servidor construido con Node.js.
+Este repositorio proporciona una plantilla base para construir increíbles servidores utilizando Node.js. Ya sea que estés empezando un nuevo proyecto o buscando inspiración para mejorar tu servidor existente, esta plantilla está diseñada para ayudarte a comenzar con buen pie.
 
-![Versión](https://img.shields.io/badge/Versi%C3%B3n-1.0.0-00d679?style=for-the-badge&logo=V)
-
-## Tabla de Contenidos
-
-- [Requisitos Previos](#requisitos-previos)
-- [Instalación](#instalación)
-- [Estructura del Proyecto](#estructura-del-proyecto)
-- [Configuración](#configuración)
-- [Uso](#uso)
-- [Características](#características)
-- [Contribución](#contribución)
-
-
-# Template Node.js Server
 
 ![Node.js Logo](https://nodejs.org/static/images/logo.svg)
 
@@ -66,6 +52,17 @@ Descripción extensa de tu increíble servidor construido con Node.js.
 ![Winston](https://img.shields.io/badge/Winston-^3.11.0-4B0082?style=for-the-badge&logo=Winston)
 ![Winston Daily Rotate File](https://img.shields.io/badge/Winston_Daily_Rotate_File-^4.7.1-4B0082?style=for-the-badge&logo=Winston)
 ![XSS Clean](https://img.shields.io/badge/XSS_Clean-^0.1.4-800000?style=for-the-badge&logo=Security)
+
+## Tabla de Contenidos
+
+- [Requisitos Previos](#requisitos-previos)
+- [Instalación](#instalación)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Configuración](#configuración)
+- [Uso](#uso)
+- [Características](#características)
+- [Contribución](#contribución)
+
 
 ## Tabla de Contenidos
 
