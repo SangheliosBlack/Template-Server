@@ -12,17 +12,18 @@
 Este repositorio proporciona una plantilla base para construir increíbles servidores utilizando Node.js. Ya sea que estés empezando un nuevo proyecto o buscando inspiración para mejorar tu servidor existente, esta plantilla está diseñada para ayudarte a comenzar con buen pie.
 
 
-![Versión](https://img.shields.io/badge/Version-1.0.0-00d679?style=for-the-badge&logo=V)
-![AWS SDK](https://img.shields.io/badge/AWS_SDK-^3.485.0-FF9900?style=for-the-badge&logo=Amazon-AWS)
-![Express](https://img.shields.io/badge/Express-^4.18.2-000000?style=for-the-badge&logo=Express)
-![Firebase Admin](https://img.shields.io/badge/Firebase_Admin-^12.0.0-FFA500?style=for-the-badge&logo=Firebase)
-![Helmet](https://img.shields.io/badge/Helmet-^7.1.0-800080?style=for-the-badge&logo=Bitdefender)
-![Mongoose](https://img.shields.io/badge/Mongoose-^5.12.14-47A248?style=for-the-badge&logo=MongoDB)
-![Morgan](https://img.shields.io/badge/Morgan-^1.10.0-87CEEB?style=for-the-badge&logo=Apache)
-![Passport](https://img.shields.io/badge/Passport-^0.7.0-4169E1?style=for-the-badge&logo=Security)
-![Socket.io](https://img.shields.io/badge/Socket.io-^4.5.0-010101?style=for-the-badge&logo=Socket.io)
-![Swagger UI Express](https://img.shields.io/badge/Swagger_UI_Express-^5.0.0-85EA2D?style=for-the-badge&logo=Swagger)
-![Winston](https://img.shields.io/badge/Winston-^3.11.0-4B0082?style=for-the-badge&logo=Winston)
+![Versión](https://img.shields.io/badge/Version-1.0.0-00d679?style=for-the-badge&logo=V&labelColor=00d679&color=ffffff)
+![AWS SDK](https://img.shields.io/badge/AWS_SDK-^3.485.0-FF9900?style=for-the-badge&logo=Amazon-AWS&labelColor=FF9900&color=ffffff)
+![Express](https://img.shields.io/badge/Express-^4.18.2-000000?style=for-the-badge&logo=Express&labelColor=000000&color=ffffff)
+![Firebase Admin](https://img.shields.io/badge/Firebase_Admin-^12.0.0-FFA500?style=for-the-badge&logo=Firebase&labelColor=FFA500&color=ffffff)
+![Helmet](https://img.shields.io/badge/Helmet-^7.1.0-800080?style=for-the-badge&logo=Bitdefender&labelColor=800080&color=ffffff)
+![Mongoose](https://img.shields.io/badge/Mongoose-^5.12.14-47A248?style=for-the-badge&logo=MongoDB&labelColor=47A248&color=ffffff)
+![Morgan](https://img.shields.io/badge/Morgan-^1.10.0-87CEEB?style=for-the-badge&logo=Apache&labelColor=87CEEB&color=ffffff)
+![Passport](https://img.shields.io/badge/Passport-^0.7.0-4169E1?style=for-the-badge&logo=Security&labelColor=4169E1&color=ffffff)
+![Socket.io](https://img.shields.io/badge/Socket.io-^4.5.0-010101?style=for-the-badge&logo=Socket.io&labelColor=010101&color=ffffff)
+![Swagger UI Express](https://img.shields.io/badge/Swagger_UI_Express-^5.0.0-85EA2D?style=for-the-badge&logo=Swagger&labelColor=85EA2D&color=ffffff)
+![Winston](https://img.shields.io/badge/Winston-^3.11.0-4B0082?style=for-the-badge&logo=Winston&labelColor=4B0082&color=ffffff)
+
 
 ## Descripcion
 
