@@ -1,8 +1,8 @@
 <a href="https://nodejs.org/">
   <h1 align="center">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://nodejs.org/static/images/logo.svg">
-      <img alt="Node.js" src="https://nodejs.org/static/images/logo.svg" style="width: 350px; height: 350px;">
+      <source media="(prefers-color-scheme: dark)" srcset="https://nodejs.org/static/images/logo.png">
+      <img alt="Node.js" src="https://nodejs.org/static/images/logo.png">
     </picture>
   </h1>
 </a>
