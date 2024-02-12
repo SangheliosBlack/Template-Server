@@ -133,7 +133,7 @@ El proyecto cuenta con las siguientes características:
 
 - **Express-swagger-generator:** Genera documentación Swagger automáticamente. [Documentación de Swagger](https://swagger.io/) y [Documentación de Express-swagger-generator](https://www.npmjs.com/package/express-swagger-generator)
 
-# Contributing to My Awesome Project
+## Contributing to My Awesome Project
 
 Thank you for your interest in contributing to this project! Please follow these guidelines to contribute effectively.
 
@@ -150,9 +150,13 @@ Thank you for your interest in contributing to this project! Please follow these
 
 ## Coding Guidelines
 
-Please follow the coding guidelines outlined in the project. If in doubt, refer to this document.
+Please follow the coding guidelines outlined in the project. If in doubt, refer to the CONTRIBUTING.md file.
 
-Thank you for contributing to My Awesome Project!
+## Code of Conduct
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms.
+
+Thank you for contributing to Mongoose Easy CRUD!
 
 ## Contribuidores
 
