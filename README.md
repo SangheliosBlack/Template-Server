@@ -22,7 +22,7 @@ Este repositorio proporciona una plantilla base para construir increíbles servi
 ![Passport](https://img.shields.io/badge/Passport-^0.7.0-4169E1?style=for-the-badge&logo=Security&labelColor=4169E1&color=00d679)
 ![Socket.io](https://img.shields.io/badge/Socket.io-^4.5.0-010101?style=for-the-badge&logo=Socket.io&labelColor=010101&color=00d679)
 ![Swagger UI Express](https://img.shields.io/badge/Swagger_UI_Express-^5.0.0-85EA2D?style=for-the-badge&logo=Swagger&labelColor=85EA2D&color=00d679)
-![Winston](https://img.shields.io/badge/Winston-^3.11.0?style=for-the-badge&logo=Winston&labelColor=4B0082&color=00d679)
+![Winston](https://img.shields.io/badge/Winston-^3.11.0-4B0082?style=for-the-badge&logo=Winston&labelColor=4B0082&color=00d679)
 
 
 ## Descripcion
