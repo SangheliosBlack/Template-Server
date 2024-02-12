@@ -12,9 +12,8 @@
 Este repositorio proporciona una plantilla base para construir increíbles servidores utilizando Node.js. Ya sea que estés empezando un nuevo proyecto o buscando inspiración para mejorar tu servidor existente, esta plantilla está diseñada para ayudarte a comenzar con buen pie.
 
 
-![Node.js Logo](https://nodejs.org/static/images/logo.svg)
 
-Descripción extensa de tu increíble servidor construido con Node.js.
+Con un diseño extensible y modular, esta plantilla proporciona la flexibilidad necesaria para adaptarse a cualquier tipo de proyecto. Ya sea que estés construyendo una aplicación de comercio electrónico, una aplicación de productividad o una innovadora aplicación de medios, esta plantilla ofrece una base sólida que puedes personalizar y ampliar según tus necesidades específicas
 
 ![Versión](https://img.shields.io/badge/Version-1.0.0-00d679?style=for-the-badge&logo=V)
 ![AWS SDK](https://img.shields.io/badge/AWS_SDK-^3.485.0-FF9900?style=for-the-badge&logo=Amazon-AWS)
