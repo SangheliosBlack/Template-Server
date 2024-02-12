@@ -1,3 +1,29 @@
+<a href="https://nodejs.org/">
+  <h1 align="center">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://nodejs.org/static/images/logo.svg">
+      <img alt="Node.js" src="https://nodejs.org/static/images/logo.svg">
+    </picture>
+  </h1>
+</a>
+
+# Plantilla para Servidor Node.js
+
+Descripción detallada de tu increíble servidor construido con Node.js.
+
+![Versión](https://img.shields.io/badge/Versi%C3%B3n-1.0.0-00d679?style=for-the-badge&logo=V)
+
+## Tabla de Contenidos
+
+- [Requisitos Previos](#requisitos-previos)
+- [Instalación](#instalación)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Configuración](#configuración)
+- [Uso](#uso)
+- [Características](#características)
+- [Contribución](#contribución
+
+
 # Template Node.js Server
 
 ![Node.js Logo](https://nodejs.org/static/images/logo.svg)
