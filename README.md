@@ -14,27 +14,17 @@ Este repositorio proporciona una plantilla base para construir increíbles servi
 
 ![Versión](https://img.shields.io/badge/Version-1.0.0-00d679?style=for-the-badge&logo=V)
 ![AWS SDK](https://img.shields.io/badge/AWS_SDK-^3.485.0-FF9900?style=for-the-badge&logo=Amazon-AWS)
-![Compression](https://img.shields.io/badge/Compression-^1.7.4-808080?style=for-the-badge&logo=zip)
-![CORS](https://img.shields.io/badge/CORS-^2.8.5-990000?style=for-the-badge&logo=APIs)
-![Dotenv](https://img.shields.io/badge/Dotenv-^10.0.0-00C300?style=for-the-badge&logo=Docker)
 ![Express](https://img.shields.io/badge/Express-^4.18.2-000000?style=for-the-badge&logo=Express)
-![Express Swagger Generator](https://img.shields.io/badge/Express_Swagger_Generator-^1.1.17-000080?style=for-the-badge&logo=Swagger)
-![Express Validator](https://img.shields.io/badge/Express_Validator-^6.12.0-8B0000?style=for-the-badge&logo=JavaScript)
-![Express Winston](https://img.shields.io/badge/Express_Winston-^4.2.0-008080?style=for-the-badge&logo=Winston)
 ![Firebase Admin](https://img.shields.io/badge/Firebase_Admin-^12.0.0-FFA500?style=for-the-badge&logo=Firebase)
 ![Helmet](https://img.shields.io/badge/Helmet-^7.1.0-800080?style=for-the-badge&logo=Bitdefender)
-![JSON Web Token](https://img.shields.io/badge/JSON_Web_Token-^9.0.2-000080?style=for-the-badge&logo=JSON)
-![Moment](https://img.shields.io/badge/Moment-^2.29.1-008000?style=for-the-badge&logo=DateTime)
 ![Mongoose](https://img.shields.io/badge/Mongoose-^5.12.14-47A248?style=for-the-badge&logo=MongoDB)
 ![Morgan](https://img.shields.io/badge/Morgan-^1.10.0-87CEEB?style=for-the-badge&logo=Apache)
-![Multer](https://img.shields.io/badge/Multer-^1.4.5--lts.1-9400D3?style=for-the-badge&logo=File)
 ![Passport](https://img.shields.io/badge/Passport-^0.7.0-4169E1?style=for-the-badge&logo=Security)
 ![Socket.io](https://img.shields.io/badge/Socket.io-^4.5.0-010101?style=for-the-badge&logo=Socket.io)
 ![Swagger UI Express](https://img.shields.io/badge/Swagger_UI_Express-^5.0.0-85EA2D?style=for-the-badge&logo=Swagger)
 ![Winston](https://img.shields.io/badge/Winston-^3.11.0-4B0082?style=for-the-badge&logo=Winston)
 
 ## Descripcion
-
 
 Con un diseño extensible y modular, esta plantilla proporciona la flexibilidad necesaria para adaptarse a cualquier tipo de proyecto. Ya sea que estés construyendo una aplicación de comercio electrónico, una aplicación de productividad o una innovadora aplicación de medios, esta plantilla ofrece una base sólida que puedes personalizar y ampliar según tus necesidades específicas
 
@@ -151,6 +141,10 @@ Si deseas contribuir a este proyecto, sigue estos pasos:
 3. Realiza tus cambios y haz commit (`git commit -am 'Agregando nueva funcionalidad'`).
 4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
 5. Crea un Pull Request.
+
+## Contribuidores
+
+[![Julio Villagrana](https://avatars.githubusercontent.com/u/50421116?s=96&v=4)](https://github.com/SangheliosBlack)
 
 # Licencia
 
