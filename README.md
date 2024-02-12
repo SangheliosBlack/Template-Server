@@ -150,13 +150,13 @@ Thank you for your interest in contributing to this project! Please follow these
 
 ## Coding Guidelines
 
-Please follow the coding guidelines outlined in the project. If in doubt, refer to the CONTRIBUTING.md file.
+Please follow the coding guidelines outlined in the project. If in doubt, refer to the [CONTRIBUTING](CONTRIBUTING) file.
 
 ## Code of Conduct
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms.
 
-Thank you for contributing to Mongoose Easy CRUD!
+Thank you for contributing to Template Server!
 
 ## Contribuidores
 
