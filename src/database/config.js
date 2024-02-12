@@ -12,11 +12,11 @@ const dbConnection = async()=>{
             useFindAndModify: false
         });
     
-        logger.info('Base de datos conectada');
+        logger.info('Connected database');
 
     }catch(error){
         
-        new AppError('Error en la base de datos - Hable con el Admin', 404);
+        new AppError('Database Error - Talk to Admin', 404);
 
     }
 }

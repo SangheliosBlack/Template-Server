@@ -1,7 +1,20 @@
+const chalk = require('chalk');
 const { createLogger, format, transports } = require('winston');
 require('winston-daily-rotate-file');
 const loggerConfig = require('../config/loggerConfig');
 const environmentConfig = require('../config/environmentConfig');
+
+const coloredFormat = format.printf(
+  (info) =>
+    `[${info.timestamp}] ${info.level}: ${
+      info.message && info.level !== 'error' ? chalk.white.bgBlue.bold(info.message) : info.message
+    } ${
+      info.stack
+        ? '\n ' +
+          (info.level === 'error' ? chalk.red(info.stack) : chalk.gray(info.stack))
+        : ''
+    }`
+);
 
 const fileTransport = new transports.File({
   filename: loggerConfig.fileLogger,
@@ -9,9 +22,7 @@ const fileTransport = new transports.File({
     format.errors({ stack: true }),
     format.timestamp({ format: loggerConfig.loggerFormat }),
     format.align(),
-    format.printf(
-      (info) => `[${info.timestamp}] ${info.level}: ${info.message}`
-    )
+    coloredFormat
   ),
 });
 
@@ -25,12 +36,7 @@ const rotateFile = new transports.DailyRotateFile({
     format.errors({ stack: true }),
     format.timestamp({ format: loggerConfig.loggerFormat }),
     format.align(),
-    format.printf(
-      (info) =>
-        `[${info.timestamp}] ${info.level}: ${info.message} ${
-          info.stack ? '\n ' + info.stack : ''
-        }`
-    )
+    coloredFormat
   ),
 });
 
@@ -40,12 +46,7 @@ const consoleTransport = new transports.Console({
     format.colorize(),
     format.timestamp({ format: loggerConfig.loggerFormat }),
     format.align(),
-    format.printf(
-      (info) =>
-        `[${info.timestamp}] ${info.level}: ${info.message} ${
-          info.stack ? '\n ' + info.stack : ''
-        }`
-    )
+    coloredFormat
   ),
 });
 
