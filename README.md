@@ -2,7 +2,7 @@
   <h1 align="center">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://nodejs.org/static/images/logo.svg">
-      <img alt="Node.js" src="https://nodejs.org/static/images/logo.svg">
+      <img alt="Node.js" src="https://nodejs.org/static/images/logo.svg" style="width: 150px; height: 150px;">
     </picture>
   </h1>
 </a>
