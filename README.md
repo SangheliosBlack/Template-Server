@@ -244,7 +244,7 @@ Estamos trabajando en varias nuevas características emocionantes para mejorar a
 
 ## Pautas de Codificación
 
-Por favor, sigue las pautas de codificación descritas en el proyecto. Si tienes dudas, consulta el [CONTRIBUTING](CONTRIBUTING).
+Por favor, sigue las pautas de codificación descritas en el proyecto. Si tienes dudas, consulta el [CONTRIBUTORS](CONTRIBUTORS).
 
 ## Código de Conducta
 
