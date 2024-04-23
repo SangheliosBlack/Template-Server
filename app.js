@@ -1,24 +1,24 @@
-const {dbConnection} = require('./src/database/config');
+const {connectToDatabase} = require('./src/database/config');
 const corsOptions = require('./src/utils/cors_config');
 const compression = require('compression');
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const path = require('path');
 const passport = require('passport');
+const express = require('express');
+const morgan = require('morgan')
+const cors = require('cors');
+const path = require('path');
 
+const trim_json_values = require('./src/utils/trim_json_values');
 const expressWinston = require('express-winston')
 const xss = require('xss-clean')
-const trim_json_values = require('./src/utils/trim_json_values');
 
 const swaggerOptions = require('./src/utils/swagger_config');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
+const globalErrorHandler = require('./src/controllers/errorController');
 const AppError = require('./src/utils/appError');
 const logger = require('./src/helpers/logger');
-const globalErrorHandler = require('./src/controllers/errorController');
 
 require('dotenv').config();
 
@@ -51,7 +51,7 @@ class Server {
 
     async conectarDB(){
 
-        await dbConnection();
+        await connectToDatabase();
 
     }
 
