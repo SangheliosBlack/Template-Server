@@ -5,8 +5,6 @@ const AppError = require('../utils/appError');
 const uri = process.env.DB_ATLAS;
 
 const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
