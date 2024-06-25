@@ -6,10 +6,7 @@ const uri = process.env.DB_ATLAS;
 
 async function connectToDatabase() {
     try {
-        mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        mongoose.connect(uri);
         logger.info('Connected database');
     } catch (error) {
         new AppError('Database Error - Talk to Admin', 404);
