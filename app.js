@@ -1,46 +1,43 @@
-const {connectToDatabase} = require('./src/database/config');
-const corsOptions = require('./src/utils/cors_config');
-const compression = require('compression');
-const bodyParser = require('body-parser')
-const passport = require('passport');
-const express = require('express');
-const morgan = require('morgan')
-const cors = require('cors');
-const path = require('path');
+import expressWinston from 'express-winston';
+import swaggerUi from'swagger-ui-express';
+import swaggerJsdoc from'swagger-jsdoc';
+import compression from  'compression';
+import path, { dirname } from 'path';
+import bodyParser from 'body-parser';
+import { fileURLToPath } from 'url';
+import passport from 'passport';
+import express from 'express';
+import dotenv from 'dotenv';
+import morgan from 'morgan';
+import cors from 'cors';
+import http from 'http';
 
-const trim_json_values = require('./src/utils/trim_json_values');
-const expressWinston = require('express-winston')
-const xss = require('xss-clean')
+import globalErrorHandler from'./src/controllers/error.js';
+import {initializeSocketServer} from './src/sockets/socket.js';
+import trim_json_values from './src/utils/trim_json_values.js';
+import swaggerOptions from './src/utils/swagger_config.js';
+import corsOptions from './src/utils/cors_config.js';
+import dbConnection from './src/database/config.js';
+import AppError from './src/utils/appError.js';
+import loadRoutes from './src/routeLoader.js';
+import logger from './src/helpers/logger.js';
+import routes from './src/routes.js';
 
-const swaggerOptions = require('./src/utils/swagger_config');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+dotenv.config();
 
-const globalErrorHandler = require('./src/controllers/errorController');
-const AppError = require('./src/utils/appError');
-const logger = require('./src/helpers/logger');
-
-require('dotenv').config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class Server {
 
     constructor(){
         
         this.app = express();
-        this.server = require('http').createServer(this.app);
+        this.server = http.createServer(this.app);
         this.port = process.env.PORT || 3000;
-        this.env = process.env.NODE_ENV || 'development'
-        this.apiVersion = `/api/${process.env.API_VERSION || 'v1'}`;
+        this.apiVersion = `/api/${process.env.API_VERSION || 'v1'}/${process.env.NODE_ENV}`;
 
-        module.exports.io = require('socket.io')(this.server);
-        require('./src/sockets/socket');
-
-        this.paths = {
-
-            auth:'/auth',
-            usuario:'/usuario',
-
-        }
+        this.io = initializeSocketServer(this.server); 
 
         this.middlewares();
         this.conectarDB();
@@ -48,10 +45,9 @@ class Server {
 
     }
 
-
     async conectarDB(){
 
-        await connectToDatabase();
+        await dbConnection();
 
     }
 
@@ -61,19 +57,18 @@ class Server {
       this.setupSecurity();
       this.setupCors();
 
-      this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions.options,)));
+      this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(swaggerOptions)));
 
       this.app.get('/api-docs.json',(req,res)=>{
         res.setHeader('Content-Type','application/json');
         res.send(swaggerJsdoc(swaggerOptions.options));
       });
 
-
-      this.app.use(express.static(path.resolve(__dirname,'public')));
+      this.app.use(express.static(path.join(__dirname, 'src', 'public')));
       this.app.use(bodyParser.json(),trim_json_values);
       this.app.use(compression());
 
-      if (process.env.NODE_ENV !== 'production') {
+      if (process.env.NODE_ENV !== 'p') {
         this.app.use(morgan('dev'));
       }
 
@@ -84,7 +79,7 @@ class Server {
         })
       );
 
-      require('./src/config/authentication');
+      import('./src/config/authentication.js');
       this.app.use(passport.initialize()); 
 
       this.app.use((req, res, next) => {
@@ -94,26 +89,30 @@ class Server {
 
     }
 
-    routes(){
+    async routes()  {
 
       this.app.set('view engine', 'ejs');
-
-      this.app.use(`${this.apiVersion}${this.paths.auth}`,       require('./src/routes/autentificacion'));
-      this.app.use(`${this.apiVersion}${this.paths.usuario}`,    require('./src/routes/usuarios'));
+      this.app.set('views', path.join(__dirname, 'src', 'views'));
+      
+      await loadRoutes(this.app, routes);
 
       this.app.all('*', (req, res, next) => {
-        next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
-      });
+        
+        console.log('statusCode before creating AppError:', 404); // O el valor que estés pasando
+        
+        next(new AppError(404, `The requested URL ${req.originalUrl} was not found on this server. Please check the URL for typos or go back to the homepage.`));
 
+      });
+      
       this.app.use(globalErrorHandler);
 
     }
 
     listen(){
 
-        this.server.listen(this.port,()=>{
+        this.server.listen(this.port,() => {
 
-          logger.info(`Server running on port ${this,this.port}`);
+          logger.info(`Server running on port ${this.port} || ${this.apiVersion}`);
 
         });
         
@@ -133,8 +132,6 @@ class Server {
     }
 
     setupSecurity() {
-      
-      this.app.use(xss());
     }
     
     setupCors() {
@@ -143,4 +140,4 @@ class Server {
 
 }
 
-module.exports = Server                     ;
+export default Server;

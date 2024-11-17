@@ -1,5 +1,4 @@
-const { response } = require("express");
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const generarJWT = (uid) => {
   return new Promise((resolve, reject) => {
@@ -30,4 +29,4 @@ const comprobarJWT = (token = '')=>{
   }
 }
 
-module.exports = {generarJWT,comprobarJWT};
+export default { generarJWT, comprobarJWT};

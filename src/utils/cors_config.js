@@ -1,5 +1,7 @@
-module.exports.config ={
-    credentials: true,
-    origin: '*',
-    optionsSuccessStatus: 200
+const config = {
+  credentials: true,
+  origin: '*',
+  optionsSuccessStatus: 200
 }
+
+export default config

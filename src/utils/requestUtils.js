@@ -1,4 +1,5 @@
-exports.prepareListResponse = (status, data, message) => {
+const RequestUtil = {
+  prepareListResponse(status, data, message) {
     if (data) {
       return {
         status: status,
@@ -12,9 +13,8 @@ exports.prepareListResponse = (status, data, message) => {
       message: message,
       doc: { data: { count: 0, rows: [] } },
     };
-  };
-  
-  exports.prepareListFromQueryResponse = (status, data, message) => {
+  },
+  prepareListFromQueryResponse(status, data, message) {
     if (data) {
       return {
         status: status,
@@ -28,17 +28,20 @@ exports.prepareListResponse = (status, data, message) => {
       message: message,
       doc: { data: { count: 0, rows: [] } },
     };
-  };
-  
-  exports.prepareSingleResponse = (status, data, message) => {
+  },
+  prepareSingleResponse(status, data, message) {
     return {
       status: status,
       message: message,
       doc: { data },
     };
-  };
-  
-  exports.validParam = (param) => {
+  },
+  validParam(param) {
     return param !== undefined && param !== null;
-  };
+  }
+}
+
+export default RequestUtil;
+
+
   

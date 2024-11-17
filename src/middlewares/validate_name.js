@@ -1,7 +1,8 @@
-const messageErrors = require('../utils/messages_errors');
-const AppError = require('../utils/appError');
+import messageErrors from '../utils/messages_errors.js';
+import AppError from '../utils/appError.js';
 
 const validateName = (nombre, { req }) => {
+    
     const myArray = nombre.split(' ');
 
     if (myArray.length <= 2) {
@@ -11,4 +12,4 @@ const validateName = (nombre, { req }) => {
     return true;
 };
 
-module.exports = validateName;
+export default validateName;

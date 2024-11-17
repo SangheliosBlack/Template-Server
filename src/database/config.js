@@ -1,19 +1,21 @@
-const mongoose = require('mongoose');
-const logger = require('../helpers/logger');
-const AppError = require('../utils/appError');
+import mongoose from 'mongoose';
 
-const uri = process.env.DB_ATLAS;
+import logger from '../helpers/logger.js';
+import AppError from '../utils/appError.js';
 
-async function connectToDatabase() {
-    try {
-        mongoose.connect(uri);
-        logger.info('Connected database');
-    } catch (error) {
-        new AppError('Database Error - Talk to Admin', 404);
-    } finally {
+const dbConnection = async()=>{
+    
+    try{
+
+        mongoose.connect(process.env.DB_ATLAS);
+    
+        logger.info('Database connected');
+
+    }catch(error){
+        
+      new AppError('Database error - Contact the Admin', 404);
+
     }
 }
 
-module.exports = {
-    connectToDatabase
-};
+export default dbConnection;

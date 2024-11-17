@@ -1,6 +1,8 @@
-require('dotenv').config();
+import dotenv from 'dotenv'
 
-module.exports = {
+dotenv.config();
+
+export default {
   environment: process.env.NODE_ENV,
   apiVersion: process.env.API_VERSION,
 };

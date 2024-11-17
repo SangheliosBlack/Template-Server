@@ -1,30 +1,17 @@
-const { io } = require("../../app");
-const authenticateSocket = require('../middlewares/validate-socket');
-const controller = require('../controllers/socketController');
-const logger = require("../helpers/logger");
+import { Server as SocketIOServer } from 'socket.io';
 
-  io.on("connection", async (client) => {
+let io;
 
-    client.handshake.headers['Authorization'];
-    
-    try {
-      await authenticateSocket(client);
-
-    const user = client.request.user;
-
-    controller.onlineUser(user._id);
-    
-    client.on('disconnect', () => {
-    
-      logger.info(`Disconnected client: ${user._id}`);
-  
-      controller.offlineUser(user._id);
-  
-    });
-
-    } catch (error) {
-      console.log(error);
-    }
-    
+export function initializeSocketServer(server) {
+  io = new SocketIOServer(server);
+  io.on('connection', (client) => {
+    console.log('New client connected');
   });
+}
 
+export function getSocketServer() {
+  if (!io) {
+    throw new Error('Socket server not initialized');
+  }
+  return io;
+}

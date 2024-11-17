@@ -1,20 +1,8 @@
-const chalk = require('chalk');
-const { createLogger, format, transports } = require('winston');
-require('winston-daily-rotate-file');
-const loggerConfig = require('../config/loggerConfig');
-const environmentConfig = require('../config/environmentConfig');
+import { createLogger, format, transports } from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
-const coloredFormat = format.printf(
-  (info) =>
-    `[${info.timestamp}] ${info.level}: ${
-      info.message && info.level !== 'error' ? chalk.white.bgBlue.bold(info.message) : info.message
-    } ${
-      info.stack
-        ? '\n ' +
-          (info.level === 'error' ? chalk.red(info.stack) : chalk.gray(info.stack))
-        : ''
-    }`
-);
+import loggerConfig from '../config/loggerConfig.js';
+import environmentConfig from '../config/environmentConfig.js';
 
 const fileTransport = new transports.File({
   filename: loggerConfig.fileLogger,
@@ -22,11 +10,13 @@ const fileTransport = new transports.File({
     format.errors({ stack: true }),
     format.timestamp({ format: loggerConfig.loggerFormat }),
     format.align(),
-    coloredFormat
+    format.printf(
+      (info) => `[${info.timestamp}] ${info.level}: ${info.message}`
+    )
   ),
 });
 
-const rotateFile = new transports.DailyRotateFile({
+const rotateFile = new DailyRotateFile({
   filename: loggerConfig.rotateFileLogger,
   datePattern: loggerConfig.rotateDatePattern,
   zippedArchive: true,
@@ -36,7 +26,12 @@ const rotateFile = new transports.DailyRotateFile({
     format.errors({ stack: true }),
     format.timestamp({ format: loggerConfig.loggerFormat }),
     format.align(),
-    coloredFormat
+    format.printf(
+      (info) =>
+        `[${info.timestamp}] ${info.level}: ${info.message} ${
+          info.stack ? '\n ' + info.stack : ''
+        }`
+    )
   ),
 });
 
@@ -46,17 +41,20 @@ const consoleTransport = new transports.Console({
     format.colorize(),
     format.timestamp({ format: loggerConfig.loggerFormat }),
     format.align(),
-    coloredFormat
+    format.printf(
+      (info) =>
+        `[${info.timestamp}] ${info.level}: ${info.message} ${
+          info.stack ? '\n ' + info.stack : ''
+        }`
+    )
   ),
 });
 
-module.exports =
-  environmentConfig.environment === 'production'
-    ? createLogger({
-        transports: [consoleTransport, rotateFile],
-        exitOnError: false,
-      })
-    : createLogger({
-        transports: [consoleTransport],
-        exitOnError: false,
-      });
+const logger = createLogger({
+  transports: environmentConfig.environment === 'production'
+    ? [consoleTransport, rotateFile]
+    : [consoleTransport],
+  exitOnError: false,
+});
+
+export default logger;

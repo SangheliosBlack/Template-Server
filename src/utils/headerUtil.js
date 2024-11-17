@@ -1,6 +1,6 @@
-const logger = require('../helpers/logger');
+import error  from '../helpers/logger.js';
 
-exports.getTokenHeader = (req) => {
+function getTokenHeader(req){
   let token;
   try {
     if (
@@ -12,7 +12,9 @@ exports.getTokenHeader = (req) => {
       token = req.cookies.jwt;
     }
   } catch (err) {
-    logger.error(err.message, err);
+    error(err.message, err);
   }
   return token;
-};
+}
+
+export default getTokenHeader;

@@ -1,8 +1,14 @@
-const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from "mongoose";
+import { compare, genSalt, hash } from "bcrypt";
 
-const UserSchema = Schema({
+const { Schema, model } = mongoose;
+
+const User_Schema = Schema({
     name: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
         required: true
     },
@@ -11,10 +17,6 @@ const UserSchema = Schema({
         required: true,
         unique: true
     },
-    password: {
-        type: String,
-        required: true
-    },
     phone: {
         type: String,
         unique: true,
@@ -22,33 +24,40 @@ const UserSchema = Schema({
     },
     last_login_date:{
         type: Date,
-        required:false
+        required:true,
+        default: Date.now()
     },
     role:{
         type:String,
         required:true
+    },
+    online:{
+        type:Boolean,
+        required:true,
+        default:false
     }
 }, {
     timestamps: true
 });
 
-UserSchema.methods.toJSON = function () {
+User_Schema.methods.toJSON = function () {
     const { __v, _id, password, ...object } = this.toObject();
     object.uid = _id;
     return object;
 };
 
-UserSchema.methods.validatePassword = async function (password) {
-    return await bcrypt.compare(password, this.password);
+User_Schema.methods.validatePassword = async function (password) {
+    return await compare(password, this.password);
 };
 
-UserSchema.pre('save', async function (next) {
+
+User_Schema.pre('save', async function (next) {
     const user = this;
     if (!user.isModified('password')) return next();
 
     try {
-        const salt = await bcrypt.genSalt(8);
-        const hashedPassword = await bcrypt.hash(user.password, salt);
+        const salt = await genSalt(8);
+        const hashedPassword = await hash(user.password, salt);
         user.password = hashedPassword;
         next();
     } catch (error) {
@@ -56,4 +65,14 @@ UserSchema.pre('save', async function (next) {
     }
 });
 
-module.exports = model('User', UserSchema);
+User_Schema.statics.getFieldsInfo = function () {
+    return Object.keys(this.schema.paths)
+        .map(field => ({
+            name: field,
+            properties: this.schema.paths[field]
+        }));
+};
+
+const User = model('users',User_Schema);
+
+export default User;

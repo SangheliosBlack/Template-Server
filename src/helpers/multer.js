@@ -1,3 +1,4 @@
+/*
 const { error } = require("console");
 const multer = require("multer");
 const path = require("path");
@@ -37,3 +38,4 @@ const upload = multer({
 });
 
 module.exports = upload;
+*/

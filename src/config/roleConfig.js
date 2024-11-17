@@ -1,5 +1,3 @@
-module.exports = {
-    ADMIN: 'ADMIN',
-    CUSTOMER: 'CUSTOMER'
-  };
+export const ADMIN = 'ADMIN';
+export const CUSTOMER = 'CUSTOMER';
   

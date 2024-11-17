@@ -1,11 +1,11 @@
 // caslConfig.js
-const { AbilityBuilder, Ability } = require('@casl/ability');
-const roleConfig = require('./roleConfig');
+import { AbilityBuilder, Ability } from '@casl/ability';
+import { ADMIN } from './roleConfig.js';
 
 const defineAbilitiesFor = (user) => {
   const { can, rules } = new AbilityBuilder(Ability);
 
-  if (user && user.role === roleConfig.ADMIN) {
+  if (user && user.role === ADMIN) {
     can('manage', 'all');
   } else {
     can('read', 'all');
@@ -14,4 +14,4 @@ const defineAbilitiesFor = (user) => {
   return new Ability(rules);
 };
 
-module.exports = defineAbilitiesFor;
+export default defineAbilitiesFor;

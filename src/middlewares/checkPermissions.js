@@ -1,8 +1,8 @@
-// checkPermissions.js
-const { Ability } = require('@casl/ability');
-const defineAbilitiesFor = require('../config/caslConfig');
+//const { Ability } = require('@casl/ability');
+import defineAbilitiesFor from '../config/caslConfig.js';
 
 const checkPermissions = (action, subject) => (req, res, next) => {
+  
   const user = req.user;
 
   const ability = defineAbilitiesFor(user);
@@ -19,4 +19,4 @@ const checkPermissions = (action, subject) => (req, res, next) => {
   }
 };
 
-module.exports = checkPermissions;
+export default checkPermissions;

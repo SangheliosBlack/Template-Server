@@ -1,13 +1,12 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const JwtStrategy = require('passport-jwt').Strategy;
-const User = require("../models/user");
-const { HeaderAPIKeyStrategy } = require('passport-headerapikey');
+import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as JwtStrategy } from 'passport-jwt';
+import {HeaderAPIKeyStrategy} from 'passport-headerapikey';
+import { ExtractJwt as ExtractJWT} from 'passport-jwt';
+import passport from 'passport';
 
-const ExtractJWT = require('passport-jwt').ExtractJwt;
-
-const authConfig = require('./jwtConfig');
-const headerUtil = require('../utils/headerUtil');
+import getTokenHeader from '../utils/headerUtil.js';
+import authConfig from './jwtConfig.js';
+import { User } from "../models/index.js";
 
 const getUser = async (email) => {
   return await User.findOne({email:email});
@@ -26,22 +25,22 @@ passport.use(
 
         if (!user) {
           return done(null, false, {
-            message: 'Usuario y/o contraseña incorrecta',
+            message: 'Usuario y/o contraseña incorrecta'
           });
         }
 
         const validate = await user.validatePassword(password);
+        
         if (!validate) {
           return done(null, false, {
-            message: 'Usuario y/o contraseña incorrecta',
+            message: 'Usuario y/o contraseña incorrecta'
           });
         }
 
-        //update instance
         user.last_login_date = Date.now();
+        user.online = true;
         await user.save();
 
-        // Send the user information to the next middleware
         return done(null, user, { message: 'Inicio exitoso' });
       } catch (error) {
         return done(error);
@@ -50,7 +49,6 @@ passport.use(
   )
 );
 
-// This verifies that the token sent by the user is valid
 const jwtOptions = {
   secretOrKey: `${authConfig.secret}`,
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
@@ -60,27 +58,24 @@ const jwtOptions = {
 passport.use(
   new JwtStrategy(
     jwtOptions,
-    // eslint-disable-next-line consistent-return
     async (req, jwt_payload, done) => {
       try {
-        const token = headerUtil.getTokenHeader(req);
+
+        const token = getTokenHeader(req);
         if (!token) {
           return done(null, false, {
             message: 'No se encontró un token válido',
           });
         }
 
-        // Find the user associated with the email provided by the user
         const user = await getUser(jwt_payload.email);
 
         if (!user) {
-          // If the user isn't found in the database, return a message
           return done(null, false, {
             message: 'Token inválido',
           });
         }
 
-        // Send the user information to the next middleware
         return done(null, user);
       } catch (error) {
         done(error);

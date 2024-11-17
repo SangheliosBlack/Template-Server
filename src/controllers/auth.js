@@ -1,16 +1,15 @@
-const { generarJWT } = require("../helpers/jwt");
-const User = require("../models/user");
-const mongoose = require('mongoose');
-const catchAsync = require('../utils/catchAsync');
-const RequestUtil = require('../utils/requestUtils');
-const AppError = require('../utils/appError');
-const authConfig = require('../config/jwtConfig');
-const passport = require("passport");
-const { error } = require("../helpers/logger");
-const jwt = require('jsonwebtoken');
+import jwthelper from "../helpers/jwt.js";
+import { User } from "../models/index.js";
+import catchAsync from '../utils/catchAsync.js';
+import RequestUtil from '../utils/requestUtils.js';
+import AppError from '../utils/appError.js';
+import authConfig from '../config/jwtConfig.js';
+import passport from "passport";
+import jwt from 'jsonwebtoken';
+
 const TOKEN_TIMEOUT = 86400;
 
-const controller = {
+const AuthController = {
   crearUsuario: catchAsync(async (req, res, next) => {
     const { email, password,phone} = req.body;
 
@@ -51,10 +50,11 @@ const controller = {
       user.name = newName;
       user.email = email.toLowerCase();
       user.phone = phone;
+      user.role = "user"
 
       await user.save();
 
-      const token = await generarJWT(user.id);
+      const token = await jwthelper.generarJWT(user.id);
 
       return res.status(200).json(
         RequestUtil.prepareSingleResponse(
@@ -63,14 +63,16 @@ const controller = {
             user,
             token
           },
-          `Useario creado con éxito`
+          `Usuario creado con éxito`
         )
       );
     } catch (error) {
+      console.log(error);
+
       return next(
         new AppError(
           500,
-          'Ocurrió un error en esta operación',
+          'An error occurred in this operation.',
           'APP_00',
           'data',
           [{ message: error.message }]
@@ -86,15 +88,14 @@ const controller = {
       async(err,user,_info)=>{
 
         try {
+
           if (err || !user || user === false) {
-            return next(
-              new AppError(
-                401,
-                _info ? _info.message : err.message,
-                'USR_10',
-                'login'
-              )
-            )
+            
+            return res.status(401).json({
+              status: 'fail',
+              message: 'Invalid credentials. Please check your email and password and try again.'
+            });
+
           }
 
           req.login(user,{session: false}, async(error)=>{
@@ -112,7 +113,8 @@ const controller = {
     )(req,res,next);
 
   }),
-  renovarToken: async (req, res) => {
+  refreshToken: async (req, res) => {
+    
     req.login(req.user,{session: false}, async(error)=>{
             
       if(error) return next(error);
@@ -123,9 +125,7 @@ const controller = {
   }
 };
 
-module.exports.restrictTo =
-  (...roles) =>
-  (req, res, next) => {
+export function   restrictTo(...roles)  {     return (req, res, next) => {
     //roles is an array of strings
     const userRoles = req.user.roles.map((role) => {
       return role.dataValues.code;
@@ -141,7 +141,7 @@ module.exports.restrictTo =
       );
     }
     next();
-  };
+  };   }
 
 const createSendToken = (user, status, req, res) => {
   const payload = {
@@ -156,17 +156,20 @@ const createSendToken = (user, status, req, res) => {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      role: user.role
+      role: user.role,
+      online: user.online,
+      createdAt: user.createdAt,
+      last_connection: user.last_connection
     },
     accessToken: `${token}`,
     expiresIn: `24h`,
   });
 };
 
-const signToken = (exports.signToken = (payload) => {
+function signToken (payload){
   return jwt.sign(payload, `${authConfig.secret}`, {
     expiresIn: TOKEN_TIMEOUT,
-  }); //24 h
-});
+  });
+};
 
-module.exports = controller;
+export default AuthController;
