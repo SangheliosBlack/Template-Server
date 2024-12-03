@@ -6,4 +6,7 @@ export default async function loadRoutes(app, routes) {
   const usersRoutes = await import('./routes/users.js');
   app.use(routes.users, usersRoutes.default);
 
+  const smsRoutes = await import('./routes/sms.js');
+  app.use(routes.sms, smsRoutes.default);
+
 }

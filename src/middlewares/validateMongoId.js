@@ -1,15 +1,16 @@
-import messageErrors from '../utils/messages_errors.js';
+import mongoose from 'mongoose';
 import AppError from '../utils/appError.js';
 
-const validatePassword = async (password, { req }) => {
-    
-    const confirm_password = req.body.confirm_password;
+const validateMongoId = (req, res, next) => {
 
-    if (password !== confirm_password) {
-        new AppError(messageErrors.CONTRASENA_NO_COINCIDE,404)
+  const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+        return next(new AppError(500, 'ID inválido', 'VALIDATION_01'));
     }
-    return true;
+
+  next();
+
 };
 
-export default validatePassword;
-
+export default validateMongoId;

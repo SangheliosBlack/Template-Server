@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00005] - [03/DIC/2024] @Julio Villagrana
+- Add LabsMobile OTP service
+
 ### [00004] - [17/NOV/2024] @Julio Villagrana
 - Refactor auth configuration
 
