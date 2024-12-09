@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.arcacontal.tuali",
+    "sha256_cert_fingerprints":
+      ["4F:BD:C1:7E:34:A1:C0:83:02:8B:6B:7C:1C:E4:64:69:BD:CE:26:4F:E0:A1:98:54:C3:E0:95:64:19:41:17:CE"]
+  }
+}]

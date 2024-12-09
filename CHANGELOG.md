@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00006] - [09/DIC/2024] @Julio Villagrana
+- Add assetlinks.json to deeplinks namespace androd
+
 ### [00005] - [03/DIC/2024] @Julio Villagrana
 - Add LabsMobile OTP service
 
