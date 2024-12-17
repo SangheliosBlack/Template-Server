@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00006] - [17/DIC/2024] @Julio Villagrana
+- Add cors configuration to Flutter template port
+
 ### [00006] - [09/DIC/2024] @Julio Villagrana
 - Add assetlinks.json to deeplinks namespace androd
 

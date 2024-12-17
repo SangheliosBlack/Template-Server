@@ -16,12 +16,12 @@ import globalErrorHandler from'./src/controllers/error.js';
 import {initializeSocketServer} from './src/sockets/socket.js';
 import trim_json_values from './src/utils/trim_json_values.js';
 import swaggerOptions from './src/utils/swagger_config.js';
-import corsOptions from './src/utils/cors_config.js';
 import dbConnection from './src/database/config.js';
 import AppError from './src/utils/appError.js';
 import loadRoutes from './src/routeLoader.js';
 import logger from './src/helpers/logger.js';
 import routes from './src/routes.js';
+import corsOptions from './src/config/cors_configuration.js';
 
 dotenv.config();
 
@@ -135,7 +135,9 @@ class Server {
     }
     
     setupCors() {
-      this.app.use(cors(corsOptions.config));
+
+      this.app.use(cors(corsOptions));
+
     }
 
 }
