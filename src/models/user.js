@@ -4,7 +4,7 @@ import { compare, genSalt, hash } from "bcrypt";
 const { Schema, model } = mongoose;
 
 const User_Schema = Schema({
-    name: {
+    full_name: {
         type: String,
         required: true
     },
@@ -41,7 +41,7 @@ const User_Schema = Schema({
 });
 
 User_Schema.methods.toJSON = function () {
-    const { __v, _id, password, ...object } = this.toObject();
+    const { __v, _id, password,createdAt,updatedAt,online,...object } = this.toObject();
     //object.uid = _id;
     object.id = _id;
     return object;

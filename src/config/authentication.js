@@ -38,7 +38,9 @@ passport.use(
         }
 
         user.last_login_date = Date.now();
+        
         user.online = true;
+
         await user.save();
 
         return done(null, user, { message: 'Inicio exitoso' });
