@@ -8,8 +8,8 @@ import getTokenHeader from '../utils/headerUtil.js';
 import authConfig from './jwtConfig.js';
 import { User } from "../models/index.js";
 
-const getUser = async (email) => {
-  return await User.findOne({email:email});
+const getUser = async (id) => {
+  return await User.findById(id);
 };
 
 passport.use(
@@ -68,7 +68,7 @@ passport.use(
           });
         }
 
-        const user = await getUser(jwt_payload.email);
+        const user = await getUser(jwt_payload.id);
 
         if (!user) {
           return done(null, false, {

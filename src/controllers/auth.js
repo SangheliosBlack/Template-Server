@@ -19,20 +19,20 @@ const AuthController = {
 
       if (existEmail) {
         return res.status(400).json(
-          RequestUtil.prepareSingleResponse(
+          RequestUtil.prepareResponse(
             'success',
+            `Este correo electrónico ya está registrado`,
             {},
-            `Este correo electrónico ya está registrado`
           )
         );
       }
 
       if(existPhone){
         return res.status(400).json(
-          RequestUtil.prepareSingleResponse(
+          RequestUtil.prepareResponse(
             'success',
+            `Este numero telefonico ya está registrado`,
             {},
-            `Este numero telefonico ya está registrado`
           )
         );
       }
@@ -57,15 +57,17 @@ const AuthController = {
       const token = await jwthelper.generarJWT(user.id);
 
       return res.status(200).json(
-        RequestUtil.prepareSingleResponse(
+        RequestUtil.prepareResponse(
           'success',
+          `Usuario creado con éxito`,
           {
             user,
             token
           },
-          `Usuario creado con éxito`
+          
         )
       );
+
     } catch (error) {
       console.log(error);
 
@@ -102,7 +104,25 @@ const AuthController = {
             
             if(error) return next(error);
 
-            createSendToken(user,200,req,res)
+            const payload = {
+              id: user.id
+            };
+
+            const accessToken = signToken(payload);
+
+            return res.status(200).json(
+              RequestUtil.prepareResponse(
+                'success',
+                `Inicio de sesión exitoso`,
+                {
+                  user,
+                  accessToken
+                },
+                
+              )
+            );
+
+            //createSendToken(user,200,req,res)
 
           })
 
@@ -114,12 +134,26 @@ const AuthController = {
 
   }),
   refreshToken: async (req, res) => {
-    
+
     req.login(req.user,{session: false}, async(error)=>{
             
       if(error) return next(error);
 
-      createSendToken(req.user,200,req,res)
+      const accessToken = signToken({
+        id:req.user.id
+      });
+
+      return res.status(200).json(
+        RequestUtil.prepareResponse(
+          'success',
+          `Token refrescado exitosamente`,
+          {
+            //user:req.user,
+            accessToken
+          },
+          
+        )
+      );
 
     })
   }
@@ -151,18 +185,18 @@ const createSendToken = (user, status, req, res) => {
   const token = signToken(payload);
 
   return res.status(status).json({
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      role: user.role,
-      online: user.online,
-      createdAt: user.createdAt,
-      last_connection: user.last_connection
-    },
-    accessToken: `${token}`,
-    expiresIn: `24h`,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        online: user.online,
+        createdAt: user.createdAt,
+        last_connection: user.last_connection
+      },
+      accessToken: `${token}`,
+      expiresIn: `24h`,
   });
 };
 
