@@ -29,11 +29,11 @@ const RequestUtil = {
       doc: { data: { count: 0, rows: [] } },
     };
   },
-  prepareSingleResponse(status, data, message) {
+  prepareResponse(status, message, data) {
     return {
       status: status,
       message: message,
-      doc: { data },
+      data: data,
     };
   },
   validParam(param) {

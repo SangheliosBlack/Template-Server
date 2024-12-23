@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00007] - [23/DIC/2024] @Julio Villagrana
+- Add single response for all responses
+
 ### [00006] - [17/DIC/2024] @Julio Villagrana
 - Add cors configuration to Flutter template port
 
