@@ -6,6 +6,7 @@ import AppError from '../utils/appError.js';
 import authConfig from '../config/jwtConfig.js';
 import passport from "passport";
 import jwt from 'jsonwebtoken';
+import Roles from '../constants/roles.js';
 
 const TOKEN_TIMEOUT = 86400;
 
@@ -50,7 +51,7 @@ const AuthController = {
       user.name = newName;
       user.email = email.toLowerCase();
       user.phone = phone;
-      user.role = "user"
+      user.role = Roles.USER;
 
       await user.save();
 

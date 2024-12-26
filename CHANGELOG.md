@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00008] - [25/DIC/2024] @Julio Villagrana
+- Add Roles configuration
+
 ### [00007] - [23/DIC/2024] @Julio Villagrana
 - Add single response for all responses
 
