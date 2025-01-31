@@ -28,6 +28,6 @@ router.get('/otp/checkCode/:phone_number',checkPermissions('read','all'),SmsCont
 router.get('/otp/getEnvList/:phone_number',checkPermissions('read','read'),SmsController.getEnvList);
 
 
-router.post('/opt/cathError',SmsController.catchError)
+router.get('/opt/cathError',SmsController.catchError)
 
 export default router;
