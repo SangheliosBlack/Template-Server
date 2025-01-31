@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00009] - [31/ENE/2025] @Julio Villagrana
+- Catch web hook Labs Mobile logs error
+
 ### [00008] - [25/DIC/2024] @Julio Villagrana
 - Add Roles configuration
 

@@ -194,6 +194,13 @@ var SmsController = {
 
     res.status(200).json(RequestUtil.prepareResponse('success', data, 'List of OTP codes obtained successfully'));
 
+  }),
+  catchError: catchAsync(async(req,res,next)=>{
+
+    console.log(req.body);
+
+    res.status(200).json(RequestUtil.prepareResponse('success', req.body, 'List of OTP codes obtained successfully'));
+
   })
 }
 
