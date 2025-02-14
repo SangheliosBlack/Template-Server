@@ -12,8 +12,6 @@ const router = Router();
 
 router.use(passport.authenticate('jwt', { session: false }));
 
-router.use(passport.authenticate('jwt', { session: false }))
-
 router.get("/", checkPermissions('read', 'all'), UserController.getAllUsers);
 
 router.get("/:id", checkPermissions('read', 'all'), validateMongoId, UserController.getUserById);

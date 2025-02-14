@@ -39,7 +39,7 @@ const AuthController = {
       }
 
       const user = new User(req.body);
-      const str = req.body.name.toLowerCase();
+      const str = req.body.full_name.toLowerCase();
       const arr = str.split(" ");
 
       for (var i = 0; i < arr.length; i++) {
@@ -55,21 +55,21 @@ const AuthController = {
 
       await user.save();
 
-      const token = await jwthelper.generarJWT(user.id);
+      const accessToken = await jwthelper.generarJWT(user.id);
 
       return res.status(200).json(
         RequestUtil.prepareResponse(
           'success',
-          `Usuario creado con éxito`,
           {
             user,
-            token
+            accessToken
           },
-          
+          `Usuario creado con éxito`
         )
       );
 
     } catch (error) {
+
       console.log(error);
 
       return next(
@@ -105,25 +105,18 @@ const AuthController = {
             
             if(error) return next(error);
 
-            const payload = {
-              id: user.id
-            };
-
-            const accessToken = signToken(payload);
+            const accessToken = await jwthelper.generarJWT(user.id);
 
             return res.status(200).json(
               RequestUtil.prepareResponse(
                 'success',
-                `Inicio de sesión exitoso`,
                 {
                   user,
                   accessToken
                 },
-                
+                `Inicio de sesión exitoso`,
               )
             );
-
-            //createSendToken(user,200,req,res)
 
           })
 
@@ -198,12 +191,6 @@ const createSendToken = (user, status, req, res) => {
       },
       accessToken: `${token}`,
       expiresIn: `24h`,
-  });
-};
-
-function signToken (payload){
-  return jwt.sign(payload, `${authConfig.secret}`, {
-    expiresIn: TOKEN_TIMEOUT,
   });
 };
 

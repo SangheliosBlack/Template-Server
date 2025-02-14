@@ -6,7 +6,7 @@ const validateName = (nombre, { req }) => {
     const myArray = nombre.split(' ');
 
     if (myArray.length <= 2) {
-        new AppError(messageErrors.FORMATO_NOMBRE_INCORRECTO,404)
+        new AppError(404,messageErrors.FORMATO_NOMBRE_INCORRECTO)
     }
 
     return true;
