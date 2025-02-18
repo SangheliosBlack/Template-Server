@@ -29,10 +29,16 @@ const RequestUtil = {
       doc: { data: { count: 0, rows: [] } },
     };
   },
-  prepareResponse(status, message, data) {
+  prepareResponse(status, message, data,links) {
     return {
       status: status,
       message: message,
+      meta: {
+        "version": "1.0.0",
+        "language": "es"
+      },
+      links: links,
+      timestamp: new Date(),
       data: data,
     };
   },

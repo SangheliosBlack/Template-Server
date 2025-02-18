@@ -11,7 +11,7 @@ const router = Router();
 import passport from 'passport';
 
 router.post('/createUser',[
-    check('name').trim().not().isEmpty().withMessage(ERROR_MESSAGES.NOMBRE_OBLIGATORIO).custom(validateName),
+    check('full_name').trim().not().isEmpty().withMessage(ERROR_MESSAGES.NOMBRE_OBLIGATORIO).custom(validateName),
     check('phone').isLength({ min: 10, max: 10 }).withMessage(ERROR_MESSAGES.NUMERO_CELULAR_INVALIDO),
     check('password').trim().isLength({ min: 6, max: 16 }).withMessage(ERROR_MESSAGES.CONTRASENA_MINIMO_CARACTERES).custom(validatePassword),
     check('email').trim().isEmail().withMessage(ERROR_MESSAGES.CORREO_NO_VALIDO),
