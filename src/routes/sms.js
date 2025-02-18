@@ -10,7 +10,7 @@ import validator from '../validators/sms/index.js'
 
 const router = Router();
 
-//router.use(passport.authenticate('jwt', {session: false}));
+router.use(passport.authenticate('jwt', {session: false}));
 
 router.post("/sendSingleSmsTest", checkPermissions('read','all'), validateSchema(validator.smsSingleSend),SmsController.sendSingleSmsTest);
 
@@ -26,7 +26,6 @@ router.get('/otp/validateCode/:phone_number/:code',checkPermissions('read','all'
 router.get('/otp/checkCode/:phone_number',checkPermissions('read','all'),SmsController.checkCode);
 
 router.get('/otp/getEnvList/:phone_number',checkPermissions('read','read'),SmsController.getEnvList);
-
 
 router.get('/opt/cathError',SmsController.catchError)
 

@@ -110,11 +110,11 @@ const AuthController = {
             return res.status(200).json(
               RequestUtil.prepareResponse(
                 'success',
+                `Login successful`,
                 {
                   user,
                   accessToken
                 },
-                `Inicio de sesión exitoso`,
               )
             );
 

@@ -9,4 +9,7 @@ export default async function loadRoutes(app, routes) {
   const smsRoutes = await import('./routes/sms.js');
   app.use(routes.sms, smsRoutes.default);
 
+  const uploadRoutes = await import('./routes/upload.js');
+  app.use(routes.upload, uploadRoutes.default);
+
 }
