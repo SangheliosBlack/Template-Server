@@ -12,6 +12,7 @@ const generarJWT = (id) => {
       process.env.JWT_KEY,
       {
         expiresIn: 86400,
+        issuer: process.env.JWT_KEY
       },
       (err, token) => {
         if (err) {
