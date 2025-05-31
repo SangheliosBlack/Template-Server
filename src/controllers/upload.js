@@ -26,7 +26,7 @@ var UploadController = {
         if (err) {
 
           res.status(200).json(
-            RequestUtil.prepareResponse("success", "Invoice uploaded and analyzed successfully", {
+            RequestUtil.prepareResponse(500, "Invoice uploaded and analyzed successfully", {
               data: data['documents']
             })
           );
@@ -48,7 +48,7 @@ var UploadController = {
         AzureDocumentIntelligenceUtils.removeBoundingRegions(response);
 
         res.status(200).json(
-          RequestUtil.prepareResponse("success", "Invoice uploaded and analyzed successfully",response)
+          RequestUtil.prepareResponse(200, "Invoice uploaded and analyzed successfully",response)
         );
 
 
@@ -74,7 +74,7 @@ var UploadController = {
 
     } catch (error) {
 
-      res.status(500).json(RequestUtil.prepareResponse("error", {}, error.message));
+      res.status(500).json(RequestUtil.prepareResponse(500, {}, error.message));
 
     }
   

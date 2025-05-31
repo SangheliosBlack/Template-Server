@@ -21,7 +21,7 @@ const AuthController = {
       if (existEmail) {
         return res.status(400).json(
           RequestUtil.prepareResponse(
-            'success',
+            400,
             `Este correo electrónico ya está registrado`,
             {},
           )
@@ -31,7 +31,7 @@ const AuthController = {
       if(existPhone){
         return res.status(400).json(
           RequestUtil.prepareResponse(
-            'success',
+            400,
             `Este numero telefonico ya está registrado`,
             {},
           )
@@ -57,9 +57,9 @@ const AuthController = {
 
       const accessToken = await jwthelper.generarJWT(user.id);
 
-      return res.status(200).json(
+      return res.status(201).json(
         RequestUtil.prepareResponse(
-          'success',
+          201,
           {
             user,
             accessToken
@@ -109,7 +109,7 @@ const AuthController = {
 
             return res.status(200).json(
               RequestUtil.prepareResponse(
-                'success',
+                200,
                 `Login successful`,
                 {
                   user,
@@ -127,29 +127,43 @@ const AuthController = {
     )(req,res,next);
 
   }),
-  refreshToken: async (req, res) => {
+  refreshToken: async (req, res, next) => {
 
-    req.login(req.user,{session: false}, async(error)=>{
-            
-      if(error) return next(error);
+    passport.authenticate(
+      'refreshToken',
+      { session: false },
+      async(err,user,_info)=>{
 
-      const accessToken = signToken({
-        id:req.user.id
-      });
-
-      return res.status(200).json(
-        RequestUtil.prepareResponse(
-          'success',
-          `Token refrescado exitosamente`,
-          {
-            //user:req.user,
-            accessToken
-          },
+        try {
           
-        )
-      );
+          //User not found can be reached if the token is expired
+          if( user === undefined || user === null){
 
-    })
+            return res.status(401).json({
+              status: 'fail',
+              message: 'Unauthorized: token issuer is not recognized.'
+            });
+
+          }
+
+          const accessToken = await jwthelper.generarJWT(user.id);
+
+          return res.status(200).json(
+            RequestUtil.prepareResponse(
+              200,
+              `Refresh token successful.`,
+              {
+                accessToken
+              },
+            )
+          );
+
+        } catch (error) {
+          return next(error);
+        }
+      }
+    )(req,res,next);
+
   }
 };
 

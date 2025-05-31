@@ -8,9 +8,51 @@ import getTokenHeader from '../utils/headerUtil.js';
 import authConfig from './jwtConfig.js';
 import { User } from "../models/index.js";
 
+import jwt from 'jsonwebtoken';
+
 const getUser = async (id) => {
   return await User.findById(id);
 };
+
+const jwtOptions = {
+  secretOrKey: `${authConfig.secret}`,
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  passReqToCallback: true,
+};
+
+passport.use(
+  'refreshToken',
+  new JwtStrategy(
+    jwtOptions,
+    async (req, payload, done) => {
+      try {
+        
+        const token = getTokenHeader(req);
+
+        const payload = jwt.verify(token, authConfig.secret, { ignoreExpiration: true,issuer:process.env.JWT_KEY});
+
+        const user = await User.findById({_id:payload.id});
+
+        const isExpired = payload.exp && Date.now() >= payload.exp * 1000;
+
+        if (isExpired) {
+
+          console.log('The token has expired');
+
+        } else {
+
+          console.log('The token is still valid');
+
+        }
+
+        return done(null, user, { message: 'Refresh successful' });
+
+      } catch (error) {
+        return done(error, false);
+      }
+    }
+  )
+);
 
 passport.use(
   'login',
@@ -50,12 +92,6 @@ passport.use(
     }
   )
 );
-
-const jwtOptions = {
-  secretOrKey: `${authConfig.secret}`,
-  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  passReqToCallback: true,
-};
 
 passport.use(
   new JwtStrategy(

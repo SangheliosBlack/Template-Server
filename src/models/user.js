@@ -35,6 +35,11 @@ const User_Schema = Schema({
         type:Boolean,
         required:true,
         default:false
+    },
+    fcmToken:{
+      type:String,
+      required: false,
+      default: ""
     }
 }, {
     timestamps: true

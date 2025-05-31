@@ -26,11 +26,11 @@ var SmsController = {
   
       const response = await axiosSmsInstance.post('json/send',data);
       
-      res.status(200).json(RequestUtil.prepareResponse('success', response, 'Send Single SMS'));
+      res.status(200).json(RequestUtil.prepareResponse(200, response, 'Send Single SMS'));
 
     } catch (error) {
       
-      res.status(500).json(RequestUtil.prepareResponse('error', {}, error.response?.data.message ));
+      res.status(500).json(RequestUtil.prepareResponse(500, {}, error.response?.data.message ));
 
     }
 
@@ -39,7 +39,7 @@ var SmsController = {
 
     const response = await axiosSmsInstance.get('json/balance');
 
-    res.status(200).json(RequestUtil.prepareResponse('success', response, 'Current balance'));
+    res.status(200).json(RequestUtil.prepareResponse(200, response, 'Current balance'));
 
   }),
   sendOTP: catchAsync( async (req,res,next) => {
@@ -63,7 +63,7 @@ var SmsController = {
           "status": data 
         }
  
-        res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP sent successfully'));
+        res.status(200).json(RequestUtil.prepareResponse(200, response, 'OTP sent successfully'));
 
       }else{
 
@@ -74,14 +74,14 @@ var SmsController = {
           "status": data 
         }
  
-        res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP sent successfully'));
+        res.status(200).json(RequestUtil.prepareResponse(200, response, 'OTP sent successfully'));
 
       }
  
     
     } catch (error) {
 
-      res.status(500).json(RequestUtil.prepareResponse('error', {}, error.response?.data.message ));
+      res.status(500).json(RequestUtil.prepareResponse(500, {}, error.response?.data.message ));
 
     }
 
@@ -97,11 +97,11 @@ var SmsController = {
   
        const response = await axiosSmsInstance.get(`otp/resendCode?env=${encodeURIComponent(env)}&sender=${encodeURIComponent(sender)}&phone_number=${encodeURIComponent(phone_number)}&message=${encodeURIComponent(message)}`);
   
-       res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP resend successfully'));
+       res.status(200).json(RequestUtil.prepareResponse(200, response, 'OTP resend successfully'));
      
      } catch (error) {
  
-       res.status(500).json(RequestUtil.prepareResponse('error', {}, error.response?.data.message ));
+       res.status(500).json(RequestUtil.prepareResponse(500, {}, error.response?.data.message ));
  
      }
  
@@ -133,11 +133,11 @@ var SmsController = {
 
       }
   
-      res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP validate successfully'));
+      res.status(200).json(RequestUtil.prepareResponse(200, response, 'OTP validate successfully'));
      
     } catch (error) {
  
-      res.status(500).json(RequestUtil.prepareResponse('error', {}, error.response?.data.message ));
+      res.status(500).json(RequestUtil.prepareResponse(500, {}, error.response?.data.message ));
  
     }
  
@@ -169,11 +169,11 @@ var SmsController = {
 
       }
   
-      res.status(200).json(RequestUtil.prepareResponse('success', response, 'OTP checked successfully'));
+      res.status(200).json(RequestUtil.prepareResponse(200, response, 'OTP checked successfully'));
      
     } catch (error) {
  
-      res.status(500).json(RequestUtil.prepareResponse('error', {}, error.response?.data.message ));
+      res.status(500).json(RequestUtil.prepareResponse(500, {}, error.response?.data.message ));
  
     }
  
@@ -192,14 +192,14 @@ var SmsController = {
       "otp_list":response
     };
 
-    res.status(200).json(RequestUtil.prepareResponse('success', data, 'List of OTP codes obtained successfully'));
+    res.status(200).json(RequestUtil.prepareResponse(200, data, 'List of OTP codes obtained successfully'));
 
   }),
   catchError: catchAsync(async(req,res,next)=>{
 
     console.log(req.body);
 
-    res.status(200).json(RequestUtil.prepareResponse('success', req.body, 'List of OTP codes obtained successfully'));
+    res.status(200).json(RequestUtil.prepareResponse(500, req.body, 'List of OTP codes obtained successfully'));
 
   })
 }
