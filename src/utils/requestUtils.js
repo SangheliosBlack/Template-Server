@@ -29,9 +29,19 @@ const RequestUtil = {
       doc: { data: { count: 0, rows: [] } },
     };
   },
-  prepareResponse(status, message, data,links) {
+  prepareResponse(statusCode, message, data,links) {
+
+    const statusTextMap = {
+      200: 'SUCCESS',
+      201: 'CREATED',
+      400: 'BAD_REQUEST',
+      404: 'NOT_FOUND',
+      500: 'ERROR'
+    };
+
     return {
-      status: status,
+      status: statusTextMap[statusCode] || 'UNKNOWN',
+      statusCode: statusCode,
       message: message,
       meta: {
         "version": "1.0.0",
