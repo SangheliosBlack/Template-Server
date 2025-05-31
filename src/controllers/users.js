@@ -4,11 +4,22 @@ import RequestUtil from '../utils/requestUtils.js';
 
 var UserController = {
   
+  getUserMe : catchAsync(async (req, res, next) => {
+
+    console.log(req.user);
+
+    const userId = req.user.id;
+
+    const user = await User.findById({_id:userId});
+
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', 'User me', user));
+
+  }),
   getAllUsers: catchAsync(async (req, res, next) => {
 
     const users = await User.find();
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', users, 'List of users'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', users, 'List of users'));
 
   }),
   getUserById: catchAsync(async (req, res, next) => {
@@ -17,11 +28,11 @@ var UserController = {
 
     if(!user){
 
-      return res.status(404).json(RequestUtil.prepareSingleResponse('error', {}, 'User not found'));
+      return res.status(404).json(RequestUtil.prepareResponse('error', {}, 'User not found'));
 
     }
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', user, 'User by id'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', user, 'User by id'));
 
   }),
   updateUser: catchAsync(async (req, res, next) => {
@@ -30,11 +41,11 @@ var UserController = {
 
     if(!user){
 
-      return res.status(404).json(RequestUtil.prepareSingleResponse('error', {}, 'User not found'));
+      return res.status(404).json(RequestUtil.prepareResponse('error', {}, 'User not found'));
 
     }
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', user, 'User updated'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', user, 'User updated'));
 
   }),
   deleteUser: catchAsync(async (req, res, next) => {
@@ -43,11 +54,11 @@ var UserController = {
 
     if(!user){
 
-      return res.status(404).json(RequestUtil.prepareSingleResponse('error', {}, 'User not found'));
+      return res.status(404).json(RequestUtil.prepareResponse('error', {}, 'User not found'));
 
     }
 
-    res.status(200).json(RequestUtil.prepareSingleResponse('success', { ok: true }, 'User deleted'));
+    res.status(200).json(RequestUtil.prepareResponse('SUCCESS', { ok: true }, 'User deleted'));
 
   })
   

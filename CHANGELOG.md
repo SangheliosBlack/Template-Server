@@ -1,5 +1,8 @@
 ## Changelog
 
+### [00012] - [31/MAY/2025] @JULIO VILLAGRANA
+- Add FCM Admin service
+
 ### [00011] - [08/MAY/2025] @JULIO VILLAGRANA
 - Add Refresh Token funcionality
 

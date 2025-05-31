@@ -12,12 +12,15 @@ const router = Router();
 
 router.use(passport.authenticate('jwt', { session: false }));
 
-router.get("/", checkPermissions('read', 'all'), UserController.getAllUsers);
+router.get("/",checkPermissions('read', 'all'), UserController.getUserMe);
+
+router.get("/all", checkPermissions('read', 'all'), UserController.getAllUsers);
 
 router.get("/:id", checkPermissions('read', 'all'), validateMongoId, UserController.getUserById);
 
 router.patch("/:id", checkPermissions('read', 'all'), validateMongoId, validateSchema(validator.userUpdateSchema), UserController.updateUser);
 
 router.delete("/:id", checkPermissions('read', 'all'), validateMongoId, UserController.deleteUser);
+
 
 export default router;

@@ -21,7 +21,7 @@ const AuthController = {
       if (existEmail) {
         return res.status(400).json(
           RequestUtil.prepareResponse(
-            'success',
+            400,
             `Este correo electrónico ya está registrado`,
             {},
           )
@@ -31,7 +31,7 @@ const AuthController = {
       if(existPhone){
         return res.status(400).json(
           RequestUtil.prepareResponse(
-            'success',
+            400,
             `Este numero telefonico ya está registrado`,
             {},
           )
@@ -57,9 +57,9 @@ const AuthController = {
 
       const accessToken = await jwthelper.generarJWT(user.id);
 
-      return res.status(200).json(
+      return res.status(201).json(
         RequestUtil.prepareResponse(
-          'success',
+          201,
           {
             user,
             accessToken
@@ -109,7 +109,7 @@ const AuthController = {
 
             return res.status(200).json(
               RequestUtil.prepareResponse(
-                'success',
+                200,
                 `Login successful`,
                 {
                   user,
@@ -150,7 +150,7 @@ const AuthController = {
 
           return res.status(200).json(
             RequestUtil.prepareResponse(
-              'success',
+              200,
               `Refresh token successful.`,
               {
                 accessToken
