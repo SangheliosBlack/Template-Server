@@ -14,10 +14,6 @@ class NotificationService {
 
   initFirebase() {
     if (admin.apps.length === 0) {
-      const serviceAccountPath = path.join(
-        process.cwd(),
-        'keys/flutter-template-b03c3-firebase_admin_sdk.json'
-      );
 
       const decoded = Buffer.from(process.env.FIREBASE_KEY_B64, 'base64').toString('utf-8');
       
