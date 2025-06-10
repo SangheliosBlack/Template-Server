@@ -7,5 +7,6 @@ export default {
   users:         buildPath(apiVersion,'/user'),
   sms:           buildPath(apiVersion,'/sms'),
   upload:        buildPath(apiVersion,'/upload'),
-  notifications: buildPath(apiVersion,'/notifications')
+  notifications: buildPath(apiVersion,'/notifications'),
+  hello:        buildPath(apiVersion,'/')
 };

@@ -15,4 +15,7 @@ export default async function loadRoutes(app, routes) {
   const notificacionsRoutes = await import('./routes/notifications.js');
   app.use(routes.notifications, notificacionsRoutes.default);
 
+  const helloRoutes = await import('./routes/hello.js');
+  app.use(routes.hello, helloRoutes.default);
+
 }

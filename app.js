@@ -96,13 +96,6 @@ class Server {
       
       await loadRoutes(this.app, routes);
 
-      this.app.get('/', (req, res) => {
-
-        res.send('Hello World');
-
-      });
-
-      
       this.app.use(globalErrorHandler);
 
     }
