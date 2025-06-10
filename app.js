@@ -100,9 +100,11 @@ class Server {
         
         console.log('statusCode before creating AppError:', 404); // O el valor que estés pasando
         
-        next(new AppError(404, `The requested URL ${req.originalUrl} was not found on this server. Please check the URL for typos or go back to the homepage.`));
+        //next(new AppError(404, `The requested URL ${req.originalUrl} was not found on this server. Please check the URL for typos or go back to the homepage.`));
 
       });
+
+      
       
       this.app.use(globalErrorHandler);
 
