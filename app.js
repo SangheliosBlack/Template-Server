@@ -96,15 +96,12 @@ class Server {
       
       await loadRoutes(this.app, routes);
 
-      this.app.all('*', (req, res, next) => {
-        
-        console.log('statusCode before creating AppError:', 404); // O el valor que estés pasando
-        
-        //next(new AppError(404, `The requested URL ${req.originalUrl} was not found on this server. Please check the URL for typos or go back to the homepage.`));
+      this.app.get('/', (req, res) => {
+
+        res.send('Hello World');
 
       });
 
-      
       
       this.app.use(globalErrorHandler);
 
