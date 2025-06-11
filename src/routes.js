@@ -8,5 +8,5 @@ export default {
   sms:           buildPath(apiVersion,'/sms'),
   upload:        buildPath(apiVersion,'/upload'),
   notifications: buildPath(apiVersion,'/notifications'),
-  hello:        buildPath(apiVersion,'/')
+  hello:        '/'
 };
